@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour
     IconController m_Space;
 
     //現在のステージ
-    public static int m_StageNum = 2;
+    public static int s_StageNum = 1;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class StageManager : MonoBehaviour
         m_Space.Show(0);
 
         //現在のステージの進行状況を確認して、ボタンを押してよい状態でなければオフにする
-        if (m_StageNum != 1)
+        if (s_StageNum != 1)
         {
             Button btn = m_Space.GetComponent<Button>();
             btn.interactable = false;
@@ -32,7 +32,7 @@ public class StageManager : MonoBehaviour
             m_Space = Instantiate(m_SpacePrefab, m_Stage[1], false);
             int rnd = Random.Range(0, 3);
             m_Space.Show(rnd);
-            if (m_StageNum != 2)
+            if (s_StageNum != 2)
             {
                 Button btn = m_Space.GetComponent<Button>();
                 btn.interactable = false;
@@ -44,7 +44,7 @@ public class StageManager : MonoBehaviour
             int rnd = Random.Range(0, 3);
             m_Space = Instantiate(m_SpacePrefab, m_Stage[2], false);
             m_Space.Show(rnd);
-            if (m_StageNum != 3)
+            if (s_StageNum != 3)
             {
                 Button btn = m_Space.GetComponent<Button>();
                 btn.interactable = false;
@@ -53,7 +53,7 @@ public class StageManager : MonoBehaviour
 
         m_Space = Instantiate(m_SpacePrefab, m_Stage[3], false);
         m_Space.Show(3);
-        if (m_StageNum != 4)
+        if (s_StageNum != 4)
         {
             Button btn = m_Space.GetComponent<Button>();
             btn.interactable = false;

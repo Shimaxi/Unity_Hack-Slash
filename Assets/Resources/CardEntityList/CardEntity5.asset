@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7382f80d60464e24abe867c4c086b157, type: 3}
-  m_Name: CardEntity2
+  m_Name: CardEntity5
   m_EditorClassIdentifier: 
-  cardID: 2
-  cardName: "\u30CF\u30FC\u30D4\u30A3"
+  cardID: 5
+  cardName: "\u30DB\u30FC\u30CD\u30C3\u30C8"
   cardCost: 0
   cardImage: {fileID: 0}
   cardText: 
-  cardAttackDamage: 4
-  cardMagicAttackDamage: 6
+  cardAttackDamage: 2
+  cardMagicAttackDamage: 2

@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class CardMovement_Main : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public BattleManager m_BattleManager;
     public Transform m_DefaultParent;
+
+    public PreparationManager m_PreparationManager;
+
+    private RectTransform rectTransform;
+
+    Vector2 rootPos = new Vector2(520f, 960f); //âÊñ ÇÃîºï™
 
     public void Start()
     {
-        m_BattleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
+        m_PreparationManager = GameObject.Find("PreparationManager").GetComponent<PreparationManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -18,22 +23,19 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         m_DefaultParent = transform.parent;
         transform.SetParent(m_DefaultParent.parent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
-        m_BattleManager.UpdateDamage();
+        m_PreparationManager.DeckCount();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        transform.localPosition = eventData.position - rootPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.SetParent(m_DefaultParent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        m_BattleManager.UpdateDamage();
-        if(transform.parent.name == "ATKCardArea")
-        {
-            Debug.Log("çUåÇ");
-        }
+        m_PreparationManager.DeckCount();
     }
 }
+

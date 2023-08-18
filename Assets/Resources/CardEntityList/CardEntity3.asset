@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7382f80d60464e24abe867c4c086b157, type: 3}
   m_Name: CardEntity3
   m_EditorClassIdentifier: 
+  cardID: 3
   cardName: "\u30AA\u30FC\u30AF"
   cardCost: 0
   cardImage: {fileID: 0}
   cardText: 
-  cardAttackDamage: 7
-  cardMagicAttackDamage: 1
+  cardAttackDamage: 3
+  cardMagicAttackDamage: 7

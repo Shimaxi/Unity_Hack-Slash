@@ -4,24 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
-    [SerializeField] private Transform m_PlayerHandTransform; //プレイヤーのハンドの位置の情報(ヒエラルキーからドラッグ&ドロップ)
+    [SerializeField , Header("カードのプレハブ")] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
+    [SerializeField, Header("プレイヤーのハンド位置")] private Transform m_PlayerHandTransform; //プレイヤーのハンドの位置の情報(ヒエラルキーからドラッグ&ドロップ)
 
-    [SerializeField] private BattleManager m_BattleManager; //BatteManager.csの関数を持ってくるために宣言
-    [SerializeField] private EnemyManager m_EnemyManager; //ヒエラルキーにスクリプトをアタッチしたGameObjectを作り、アタッチする
+    [SerializeField, Header("戦闘の計算等をを管理するスクリプト")] private BattleManager m_BattleManager; //BatteManager.csの関数を持ってくるために宣言
+    [SerializeField, Header("敵を管理するスクリプト")] private EnemyManager m_EnemyManager; //ヒエラルキーにスクリプトをアタッチしたGameObjectを作り、アタッチする
     
-    [SerializeField] private List<int> m_CemeteryPredCardList = new List<int>();//手札に来たカードを次のターンに墓地に入れるためのリスト
-    [SerializeField] private Transform[] m_RefreshArea;//ターン終了時に掃除するカード群
+    [SerializeField, Header("ターン終了時に整理する場所")] private Transform[] m_RefreshArea;//ターン終了時に掃除するエリア
 
     private bool m_TurnEndFlg = false;
 
     //【超重要】カードIDのリストをstatic宣言 いずれDataBaseみたいなのに移す
-    public static List<int> s_AllCardList = new List<int>();//全カード管理
     public static List<int> s_DeckCardList = new List<int>();//現在のデッキにあるカード
     public static List<int> s_CemeteryCardList = new List<int>();//現在の墓地にあるカード
+    [SerializeField, Header("(確認用に表示してるだけ)")] private List<int> m_CemeteryPredCardList = new List<int>();//手札に来たカードを次のターンに墓地に入れるためのリスト
 
     //DeckViewManagerでも使うのでstatic宣言
     public static bool s_DeckCheck = false; //デッキを確認したかどうかを記録しておく
@@ -38,21 +36,8 @@ public class GameManager : MonoBehaviour
     public static int s_EnemyATK; //敵の攻撃
     public static int s_EnemyMAT; //敵の魔法攻撃
 
-    //現在はテスト中なので、起動したらすぐにカードが生成されるようになっている
-    void Awake()
-    {
-        s_DeckCardList.Add(1);
-        s_DeckCardList.Add(2);
-        s_DeckCardList.Add(3);
-        s_DeckCardList.Add(1);
-        s_DeckCardList.Add(2);
-        s_DeckCardList.Add(3);
-        s_DeckCardList.Add(1);
-        s_DeckCardList.Add(2);
-        s_DeckCardList.Add(3);
+    
 
-        StartCoroutine(GameLoop());
-    }
 
     //ターンエンドボタンが押されたら
     public void OnClickTurnEndButton()
@@ -64,7 +49,13 @@ public class GameManager : MonoBehaviour
     public void OnClickExitButton()
     {
         SceneManager.LoadScene("Exploration");
+    }
 
+    void Start()
+    {
+        s_DeckCardList = Database.s_PlayerDeckCardList; //データベースにある初期山札を作成
+
+        StartCoroutine(GameLoop());
     }
 
 
