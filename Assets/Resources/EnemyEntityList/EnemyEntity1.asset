@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyID: 1
   enemyName: "\u30B9\u30E9\u30A4\u30E0"
-  enemyImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: 51a96ead678afb145b8fbf5af7b0ce01, type: 3}
   enemyHP: 10
   enemyAttackDamage: 10
   enemyMagicAttackDamage: 5
