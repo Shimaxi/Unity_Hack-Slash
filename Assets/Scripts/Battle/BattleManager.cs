@@ -52,6 +52,8 @@ public class BattleManager : MonoBehaviour
     //バトルリザルト関連
     [SerializeField] private GameObject m_BattleResult;
     [SerializeField] private Text m_BattleResultText;
+    [SerializeField] private GameObject m_NextButton;
+    [SerializeField] private GameObject m_ExitButton;
 
     //初期体力の反映
 
@@ -147,6 +149,8 @@ public class BattleManager : MonoBehaviour
         {
             m_PlayerHP = 0;
             m_BattleResult.SetActive(true);
+            m_NextButton.SetActive(false);
+            m_ExitButton.SetActive(true);
             m_BattleResultText.text = "YOU LOSE";
             GameManager.s_BattleEnd = true;
         }
@@ -155,6 +159,8 @@ public class BattleManager : MonoBehaviour
         {
             m_EnemyHP = 0;
             m_BattleResult.SetActive(true);
+            m_NextButton.SetActive(true);
+            m_ExitButton.SetActive(false);
             m_BattleResultText.text = "YOU WIN";
             GameManager.s_BattleEnd = true;
         }

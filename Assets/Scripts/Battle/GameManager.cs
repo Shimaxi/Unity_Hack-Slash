@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField , Header("カードのプレハブ")] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
+    [SerializeField, Header("カードのプレハブ")] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
     [SerializeField, Header("プレイヤーのハンド位置")] private Transform m_PlayerHandTransform; //プレイヤーのハンドの位置の情報(ヒエラルキーからドラッグ&ドロップ)
+
+    [SerializeField, Header("敵のプレハブ")] private EnemyController m_EnemyPrefab;
+    [SerializeField, Header("敵の出現位置")] private Transform m_EnemyTransform;
 
     [SerializeField, Header("戦闘の計算等をを管理するスクリプト")] private BattleManager m_BattleManager; //BatteManager.csの関数を持ってくるために宣言
     [SerializeField, Header("敵を管理するスクリプト")] private EnemyManager m_EnemyManager; //ヒエラルキーにスクリプトをアタッチしたGameObjectを作り、アタッチする
@@ -33,23 +36,29 @@ public class GameManager : MonoBehaviour
     public static int s_EnemyATK; //敵の攻撃
     public static int s_EnemyMAT; //敵の魔法攻撃
 
-    
-
-
     //ターンエンドボタンが押されたら
     public void OnClickTurnEndButton()
     {
         m_TurnEndFlg = true;
     }
 
-    //退出ボタンが押されたら
-    public void OnClickExitButton()
+    //次の敵に進むボタンが押されたら
+    public void OnClickNextButton()
     {
         SceneManager.LoadScene("Battle");
     }
 
+    //退出ボタンが押されたら
+    public void OnClickExitButton()
+    {
+        Database.s_PlayerHP = Database.s_PlayerMaxHP;
+        SceneManager.LoadScene("Main");
+}
+
     void Start()
     {
+        CreateEnemy(m_EnemyTransform);
+
         s_BattleEnd = false;
         s_DeckCheck = false;
         s_DeckCardList.Clear();
@@ -87,7 +96,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartPlayerTurn()
     {
-        m_EnemyManager.DecideEnemyBehavior();//EnemyManager内の敵の行動を決める関数
+        //m_EnemyManager.DecideEnemyBehavior();//EnemyManager内の敵の行動を決める関数
         m_BattleManager.StartTurn();//BattleManagerの起動
         yield return null;
     }
@@ -110,7 +119,13 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-
+    void CreateEnemy(Transform area)
+    {
+        EnemyController m_Enemy = Instantiate(m_EnemyPrefab, area, false);
+        m_Enemy.Init(1);
+        s_EnemyATK = m_Enemy.m_EnemyModel.m_EnemyATK;
+        s_EnemyMAT = m_Enemy.m_EnemyModel.m_EnemyMAT;
+    }
     //カードを生成する関数
     void CreateCard(Transform hand)
     {

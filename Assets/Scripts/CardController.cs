@@ -10,6 +10,7 @@ public class CardController : MonoBehaviour
     public CardView m_CardView; //CardView型で書かれたカードの見た目
 
 
+    /*
     public void Awake()
     {
         //オブジェクトが生成されたら、まず今ここは何のシーンか把握する
@@ -18,14 +19,14 @@ public class CardController : MonoBehaviour
             this.GetComponent<CardMovement>().enabled = true;
             this.GetComponent<CardMovement_Main>().enabled = false;
         } 
-        /*else if (SceneManager.GetActiveScene().name == "Main")
+        else if (SceneManager.GetActiveScene().name == "Main")
         {
             this.GetComponent<CardMovement>().enabled = false;
             this.GetComponent<CardMovement_Main>().enabled = true;
         }
-        */
 
     }
+    */
 
     public void Init(int cardID)
     {
