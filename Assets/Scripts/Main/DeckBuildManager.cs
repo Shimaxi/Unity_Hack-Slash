@@ -5,6 +5,7 @@ using UnityEngine.XR;
 
 public class DeckBuildManager : MonoBehaviour
 {
+    /*　今回はデッキ構築要素をオミット
     [SerializeField, Header("カードのプレハブ")] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
     [SerializeField, Header("プレイヤーのストレージがある位置")] private Transform m_StorageTrans; //
     [SerializeField, Header("プレイヤーのデッキがある位置")] private Transform m_DeckTrans; //
@@ -47,4 +48,5 @@ public class DeckBuildManager : MonoBehaviour
 
         }
     }
+    */
 }

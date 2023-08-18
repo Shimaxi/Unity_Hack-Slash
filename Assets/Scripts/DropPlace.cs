@@ -12,12 +12,13 @@ public class DropPlace : MonoBehaviour, IDropHandler
         {
             m_Card.m_DefaultParent = this.transform;
         }
-
+        /*
         CardMovement_Main m_Card2 = eventData.pointerDrag.GetComponent<CardMovement_Main>();
         if (m_Card != null)
         {
             m_Card2.m_DefaultParent = this.transform;
         }
+        */
 
     }
 }

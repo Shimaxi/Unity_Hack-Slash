@@ -3014,7 +3014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1336693514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3281,7 +3281,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63A2\u7D22\u306B\u623B\u308B"
+  m_Text: "\u6B21\u306E\u6575\u6226\u3046"
 --- !u!222 &1386983933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3490,7 +3490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96bbbed8c2c268439d584206a60d515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardPrefab: {fileID: 8291542968981764161, guid: 6cc05399cbb250d4ea3ffeacbd59d7b8, type: 3}
+  m_CardPrefab: {fileID: 8291542968981764161, guid: ff767a38c5186384aa30beef2e5e21ef, type: 3}
   m_DeckCardList: 
   m_CemeteryCardList: 
   m_DeckViewrTransform: {fileID: 752852764}
@@ -4569,8 +4569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -150, y: 75}
-  m_SizeDelta: {x: 300, y: 150}
+  m_AnchoredPosition: {x: -80, y: 270}
+  m_SizeDelta: {x: 100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995480943
 MonoBehaviour:
@@ -4814,7 +4814,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 240, y: 360}
+  m_CellSize: {x: 200, y: 300}
   m_Spacing: {x: 10, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2

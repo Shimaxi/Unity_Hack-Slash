@@ -34,6 +34,7 @@ public class BattleManager : MonoBehaviour
 
     //お互いの体力
     private int m_PlayerHP;
+    private int m_EnemyMaxHP = 10;
     private int m_EnemyHP;
 
     //体力スライダー
@@ -53,13 +54,16 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Text m_BattleResultText;
 
     //初期体力の反映
+
     void Start()
     {
         m_BattleResult.SetActive(false);
-        m_PlayerHP = GameManager.s_PlayerHP;
-        m_EnemyHP = GameManager.s_EnemyHP;
-        m_PlayerHPText.text = m_PlayerHP.ToString() + " / " + GameManager.s_PlayerHP.ToString();
-        m_EnemyHPText.text = m_EnemyHP.ToString() + " / " + GameManager.s_EnemyHP.ToString();
+        m_PlayerHP = Database.s_PlayerHP;
+        m_EnemyHP = m_EnemyMaxHP;
+        m_PlayerHPText.text = m_PlayerHP.ToString() + " / " + Database.s_PlayerMaxHP.ToString();
+        m_EnemyHPText.text = m_EnemyHP.ToString() + " / " + m_EnemyMaxHP.ToString();
+        m_PlayerHPSlider.value = (float)m_PlayerHP / Database.s_PlayerMaxHP;
+        m_EnemyHPSlider.value = (float)m_EnemyHP / m_EnemyMaxHP;
     }
 
     //GameManagerから呼び出し・敵の行動を反映し、スライダーをリセット
@@ -155,12 +159,14 @@ public class BattleManager : MonoBehaviour
             GameManager.s_BattleEnd = true;
         }
 
-        m_PlayerHPSlider.value = (float)m_PlayerHP / GameManager.s_PlayerHP;
-        m_EnemyHPSlider.value = (float)m_EnemyHP / GameManager.s_EnemyHP;
+        Database.s_PlayerHP = m_PlayerHP;
+
+        m_PlayerHPSlider.value = (float)m_PlayerHP / Database.s_PlayerMaxHP;
+        m_EnemyHPSlider.value = (float)m_EnemyHP / m_EnemyMaxHP;
 
 
-        m_PlayerHPText.text = m_PlayerHP.ToString() + " / " + GameManager.s_PlayerHP.ToString();
-        m_EnemyHPText.text = m_EnemyHP.ToString() + " / " + GameManager.s_EnemyHP.ToString();
+        m_PlayerHPText.text = m_PlayerHP.ToString() + " / " + Database.s_PlayerMaxHP.ToString();
+        m_EnemyHPText.text = m_EnemyHP.ToString() + " / " + m_EnemyMaxHP.ToString();
         m_PlayerATKSum = 0;
         m_PlayerMATSum = 0;
     }

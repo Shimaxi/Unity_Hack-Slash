@@ -28,9 +28,6 @@ public class GameManager : MonoBehaviour
     //
     public static bool s_BattleEnd = false;
 
-    //BattleManagerでも使うのでstatic宣言　いずれDataBaseみたいなのに移す
-    public static int s_PlayerHP = 50; //プレイヤーの最大HP情報
-    public static int s_EnemyHP = 10; //敵の最大HP情報
 
     //BattleManagerでも使うのでstatic宣言　いずれDataBaseみたいなのに移す
     public static int s_EnemyATK; //敵の攻撃
@@ -48,12 +45,18 @@ public class GameManager : MonoBehaviour
     //退出ボタンが押されたら
     public void OnClickExitButton()
     {
-        SceneManager.LoadScene("Exploration");
+        SceneManager.LoadScene("Battle");
     }
 
     void Start()
     {
-        s_DeckCardList = Database.s_PlayerDeckCardList; //データベースにある初期山札を作成
+        s_BattleEnd = false;
+        s_DeckCheck = false;
+        s_DeckCardList.Clear();
+        s_CemeteryCardList.Clear();
+        m_CemeteryPredCardList.Clear();
+
+        s_DeckCardList = new List<int>(Database.s_DeckList[0]); //データベースの山札をこのリストに移動
 
         StartCoroutine(GameLoop());
     }
@@ -139,8 +142,6 @@ public class GameManager : MonoBehaviour
         m_CemeteryPredCardList.Clear();
         s_DeckCheck = false;
         s_CemeteryCheck = false;
-
-
     }
 
 

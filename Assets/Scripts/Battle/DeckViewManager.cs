@@ -26,22 +26,24 @@ public class DeckViewManager : MonoBehaviour
     //デッキを閲覧する関数
     public void DeckView(Transform viewr)
     {
+        Debug.Log(GameManager.s_DeckCheck);
         m_CemeteryViwer.SetActive(false);//墓地のビューワー画面を消す
         m_DeckViwer.SetActive(true);//デッキのビューワー画面起動
         m_CardsViwer.SetActive(true);//ビューワー画面全体を起動
         if (GameManager.s_DeckCheck == false)
         {
-            m_DeckCardList = new List<int>(GameManager.s_DeckCardList);
+            m_DeckCardList = GameManager.s_DeckCardList;
             m_DeckCardList.Sort();//ソートしてcardID順に並べる
             int i = 0;
             while (i < m_DeckCardList.Count)
             {
                 CardController m_Card = Instantiate(m_CardPrefab, viewr, false);
                 m_Card.Init(m_DeckCardList[i]);
+                m_Card.GetComponent<CardMovement>().enabled = false;
                 i++;
             }
 
-            GameManager.s_DeckCheck = true; //ターンエンド時にfalseに戻すこと！！！！毎回呼び出すのと負荷がかかるの
+            GameManager.s_DeckCheck = true; //ターンエンド時にfalseに戻すこと！！！！毎回呼び出すのと負荷がかかるので
         }
     }
 
@@ -60,6 +62,7 @@ public class DeckViewManager : MonoBehaviour
             {
                 CardController m_Card = Instantiate(m_CardPrefab, viewr, false);
                 m_Card.Init(m_CemeteryCardList[i]);
+                m_Card.GetComponent<CardMovement>().enabled = false;
                 i++;
             }
 

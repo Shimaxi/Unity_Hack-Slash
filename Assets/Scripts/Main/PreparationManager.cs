@@ -7,11 +7,10 @@ using UnityEngine.UI;
 public class PreparationManager : MonoBehaviour
 {
     public GameObject m_StageInfo;
-    public GameObject m_Storage;
+    //public GameObject m_Storage;
 
 
     [SerializeField, Header("カードのプレハブ")] private CardController m_CardPrefab; //カードの型となるプレハブの情報(プレハブフォルダからインスペクターにドラッグ)
-    [SerializeField, Header("プレイヤーのストレージがある位置")] private Transform m_StorageTrans; //
     [SerializeField, Header("プレイヤーのデッキがある位置")] private Transform m_DeckTrans; //
 
     public bool m_DeckEditting = false;
@@ -19,7 +18,7 @@ public class PreparationManager : MonoBehaviour
     public void Start()
     {
         m_StageInfo.SetActive(false);
-        m_Storage.SetActive(false);
+        //m_Storage.SetActive(false);
 
         for (int i = 0; i < Database.s_DeckList[0].Count; i++)
         {
@@ -27,29 +26,9 @@ public class PreparationManager : MonoBehaviour
             m_Card.Init(Database.s_DeckList[0][i]);
         }
 
-        for (int i = 0; i < Database.s_AllCardList.Count; i++)
-        {
-            CardController m_Card = Instantiate(m_CardPrefab, m_StorageTrans, false);
-            m_Card.Init(Database.s_AllCardList[i]);
-        }
-
     }
 
-    public void PushEditButton()
-    {
-        if (m_DeckEditting == false)
-        {
-            m_DeckEditting = true;
-            m_Storage.SetActive(true);
-            m_EditButtonName.text = "完了";
 
-        } else if (m_DeckEditting == true)
-        {
-            m_DeckEditting = false;
-            m_Storage.SetActive(false);
-            m_EditButtonName.text = "編集";
-        }
-    }
 
     public void DeckCount()
     {
@@ -68,10 +47,51 @@ public class PreparationManager : MonoBehaviour
             Debug.Log("3枚以上のカードを入れてください");
         } else
         {
-            SceneManager.LoadScene("Exploration");
+            SceneManager.LoadScene("Battle");
         }
     }
 
+    public void PushBackButton()
+    {
+        m_StageInfo.SetActive(false);
+
+    }
+
+    public void PushDeck1Button()
+    {
+        m_StageInfo.SetActive(false);
+
+    }
+
+    public void PushDeck2Button()
+    {
+        m_StageInfo.SetActive(false);
+
+    }
+
+    public void PushDeck3Button()
+    {
+        m_StageInfo.SetActive(false);
+
+    }
+
+    /* デッキ構築に関する部分は今回オミット
+    public void PushEditButton()
+    {
+        if (m_DeckEditting == false)
+        {
+            m_DeckEditting = true;
+            m_Storage.SetActive(true);
+            m_EditButtonName.text = "完了";
+
+        } else if (m_DeckEditting == true)
+        {
+            m_DeckEditting = false;
+            m_Storage.SetActive(false);
+            m_EditButtonName.text = "編集";
+        }
+    }
+    
     public void PushRightButton()
     {
         m_Storage.transform.localPosition += new Vector3(200, 0, 0);
@@ -81,11 +101,5 @@ public class PreparationManager : MonoBehaviour
     {
         m_Storage.transform.localPosition -= new Vector3(200, 0, 0);
     }
-
-    public void PushBackButton()
-    {
-        m_StageInfo.SetActive(false);
-
-    }
-
+    */
 }

@@ -17,11 +17,13 @@ public class CardController : MonoBehaviour
         {
             this.GetComponent<CardMovement>().enabled = true;
             this.GetComponent<CardMovement_Main>().enabled = false;
-        } else if (SceneManager.GetActiveScene().name == "Main")
+        } 
+        /*else if (SceneManager.GetActiveScene().name == "Main")
         {
             this.GetComponent<CardMovement>().enabled = false;
             this.GetComponent<CardMovement_Main>().enabled = true;
         }
+        */
 
     }
 
